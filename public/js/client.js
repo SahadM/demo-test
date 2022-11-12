@@ -30,7 +30,15 @@ $('#formClient').on('submit', (e) => {
 
         return false;
     }
+    else {
+        notification_field
+            .removeClass('alert-danger')
+            .addClass('alert-success')
+            .html("Ajout effectué");
 
-    return false;
+        return false;
+    }
 
 });
+
+

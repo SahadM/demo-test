@@ -44,16 +44,15 @@
                 </div>
                 <div class="mb-3">
                     <label for="clientCodePostalInput" class="form-label">Code postal</label>
-                    <input type="email" name="code_postal" class="form-control" id="clientCodePostalInput">
+                    <input type="text" name="code_postal" class="form-control" id="clientCodePostalInput">
                 </div>
                 <div class="mb-3">
                     <label for="clientVilleInput" class="form-label">Ville</label>
-                    <input type="email" name="ville" class="form-control" id="clientVilleInput">
+                    <input type="text" name="ville" class="form-control" id="clientVilleInput">
                 </div>
                 <button type="submit" class="btn btn-primary">Ajouter un client</button>
             </form>
         
-
         </div>
 
         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
@@ -98,11 +97,6 @@
         </div>
 
     </div>
-
-
-
-
-
  
 </main>
 <script type="text/javascript" src="{{ URL::asset('js/client.js') }}"></script>

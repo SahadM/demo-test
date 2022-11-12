@@ -17,7 +17,7 @@ class MaterielController extends Controller
     {
         $validator = \Validator::make($request->all(), [
             'nom' => 'required',
-            'prix' => 'required',    
+            'prix' => 'required', 
         ]);
 
         if ($validator->fails()) {
@@ -25,7 +25,9 @@ class MaterielController extends Controller
         }
 
         $materiel = new Materiel;
-        $materiel->storeData($request->all());
+        $materiel->nom = $request->nom;
+        $materiel->prix = $request->prix;
+        $materiel->save();
 
         return redirect('/materiels');
 
