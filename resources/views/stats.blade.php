@@ -4,11 +4,11 @@
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Etats ventes clients</h1>
+        <h1 class="h2">Etats ventes par clients</h1>
     </div>
 
     <div class="alert alert-info mt-5" role="alert">
-    Aperçu des performances clients
+    Aperçu des performances par clients
     </div>
 
     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">

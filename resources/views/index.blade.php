@@ -57,7 +57,7 @@
                         @endforeach  
                     </select>   
                 </div>
-                <button type="submit" class="btn btn-primary">Ajouter</button>
+                <button type="submit" class="btn btn-primary">Assigner</button>
             </form>
         </div>
 
