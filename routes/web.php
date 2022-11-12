@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\IndexController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\MaterielController;
+use App\Http\Controllers\StatsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,20 +17,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-    // return view('layouts.main');
-});
+Route::get('/', [IndexController::class, 'index']);
+Route::get('/clients', [ClientController::class, 'index']);
+Route::get('delete_client/{id}', [ClientController::class, 'destroy'])->name('delete_client');
+Route::get('/materiels', [MaterielController::class, 'index']);
+Route::get('delete_materiel/{id}', [MaterielController::class, 'destroy'])->name('delete_materiel');
+Route::get('/stats', [StatsController::class, 'index']);
 
-Route::get('/liens', function () {
-    return view('liens');
-});
+Route::post('add_materiel_client', [IndexController::class, 'store'])->name('add_materiel_client');
+Route::post('add_client', [ClientController::class, 'store'])->name('add_client');
+Route::post('add_materiel', [MaterielController::class, 'store'])->name('add_materiel');
 
-Route::get('/clients', function () {
-    return view('clients');
-});
-
-Route::get('/materiels', function () {
-    return view('materiels');
-});
 
