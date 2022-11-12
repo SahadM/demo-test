@@ -17,7 +17,7 @@ $('#formMaterielClient').on('submit', (e) => {
         notification_field
             .removeClass('alert-danger')
             .addClass('alert-success')
-            .html("OK on est bon !");
+            .html("Assignation effectué");
 
         return false;
     }
