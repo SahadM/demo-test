@@ -44,7 +44,7 @@
             @foreach($materiels as $materiel)
                 <tr>
                     <th scope="row">{{$materiel->nom}}</th>
-                    <td>{{$materiel->prix}} €</td>
+                    <td>{{number_format($materiel->prix, 2, ',', ' ')}} €</td>
                     <td>
                         <a href="{{ route('delete_materiel', ['id' => $materiel->id]) }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
