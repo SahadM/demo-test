@@ -5,11 +5,8 @@
 .sub-row{
     background: #f1f1f1
 }
-.myCollapse {
-    display: none;
-}
-.myCollapse.in {
-    display: block;
+.hidden {
+  display:none;
 }
 </style>
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
@@ -19,7 +16,10 @@
     </div>
 
     <div id="notification" class="hide alert alert-info mt-5" role="alert">
-    Assigner un matériel à un client
+    Assigner un matériel à un client<br>
+    @if($message = Session::get('message'))
+        {{$message}}
+    @endif
     </div>
 
     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -45,8 +45,8 @@
                         <option value="" selected>Sélectionner le client</option>
                         @foreach($clients as $client)
                              <option value="{{$client->id}}">{{$client->nom}} {{$client->prenom}}</option>
-                        @endforeach            
-                    </select>     
+                        @endforeach
+                    </select>
                 </div>
                 <div class="mb-3">
                     <label for="nomMaterielInput" class="form-label">Nom du matériel</label>
@@ -54,8 +54,8 @@
                         <option value="" selected>Sélectionner le matériel</option>
                         @foreach($materiels as $materiel)
                             <option value="{{$materiel->id}}">{{$materiel->nom}} - {{$materiel->prix}}</option>
-                        @endforeach  
-                    </select>   
+                        @endforeach
+                    </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Assigner</button>
             </form>
@@ -66,49 +66,58 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">Client</th>
-                        <th scope="col">Actions</th>
+                        <th scope="col" colspan="4">Client</th>
                     </tr>
                 </thead>
                 <tbody>
+
+          
+
                 @foreach($table_lien as $lien)
-                    <tr>                     
-                        <th scope="row"> 
-                            {{$lien->nom}} {{$lien->prenom}}
-                        </th>                    
-                        <td>
-                            <a href="#" data-bs-title="Default tooltip">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                                </svg>
-                            </a>
-                        </td>                 
-                    </tr>
-                             
-                   
                     <tr>
+                        <th scope="col" colspan="4">   
+                            <button type="button" class="btn btn-secondary btn-sm" data-toggle="collapsing-{{$lien->id}}">
+                                Afficher / Cacher
+                            </button>                       
+                            <span>&nbsp;{{$lien->nom}} {{$lien->prenom}}</span>
+                        </th>
+                    </tr>
+                  
+                    {{-- <tr class="collapsing-{{$lien->id}} collapse out"> --}}
+                    <tr class="collapsing-{{$lien->id}} sub-row collapse out hidden">
+                        <th scope="col"></th>
                         <th scope="col">Materiel</th>
                         <th scope="col">Prix</th>
+                        <th scope="col">Soustraire</th>
                     </tr>
-                
-                    @foreach($lien->materiels as $materiel)    
-                        <tr class="sub-row">
+ 
+                    @foreach($lien->materiels as $materiel)
+                        <tr class="collapsing-{{$lien->id}} sub-row collapse out hidden">
+                            <td>#</td>
                             <td>{{$materiel->nom}}</td>
                             <td>{{number_format($materiel->prix, 2, ',', ' ')}} €</td>
-                        </tr>                     
+                            <td>
+                                <a href="{{ route('delete_client_materiel', ['id' => $materiel->pivot->lien_id]) }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                    </svg>
+                                </a>
+                            </td>
+                        </tr>
                     @endforeach
-                                          
+
+                    </div>
                 @endforeach
                 </tbody>
             </table>
-                     
+
             @else
                 <div class="alert alert-info mt-5" role="alert">
                     Aucun client n'a de matériels
                 </div>
             @endif
-        
+
         </div>
 
     </div>

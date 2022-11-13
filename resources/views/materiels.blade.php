@@ -2,13 +2,16 @@
 
 @section('content')
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-    
+
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Gestion des materiels</h1>        
+        <h1 class="h2">Gestion des materiels</h1>
     </div>
 
     <div id="notification" class="alert alert-info mt-5" role="alert">
-    Saisissez du materiel ci-dessous
+        Saisissez du materiel ci-dessous<br>
+        @if($message = Session::get('message'))
+            {{$message}}
+        @endif
     </div>
 
     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -38,7 +41,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Ajouter un materiel</button>
             </form>
-        
+
         </div>
 
         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
@@ -48,11 +51,11 @@
                     <tr>
                         <th scope="col">Nom</th>
                         <th scope="col">Prix</th>
-                        <th scope="col">Supprimer</th> 
+                        <th scope="col">Supprimer</th>
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($materiels as $materiel)
+                @foreach($materiels ?? '' as $materiel)
                     <tr>
                         <th scope="row">{{$materiel->nom}}</th>
                         <td>{{number_format($materiel->prix, 2, ',', ' ')}} €</td>
@@ -66,10 +69,10 @@
                         </td>
                     </tr>
                 @endforeach
-                    
+
                 </tbody>
             </table>
-    
+
             @else
                 <div class="alert alert-info mt-5" role="alert">
                     Aucun materiel de saisi pour le moment !
@@ -77,15 +80,6 @@
             @endif
         </div>
     </div>
-
-
-
-
-
-
-   
-
- 
 
 </main>
 <script type="text/javascript" src="{{ URL::asset('js/materiel.js') }}"></script>

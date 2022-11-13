@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class ClientController extends Controller
 {
 
     public function index()
     {
-        $clients = Client::get()->sortBy('nom');       
+        $clients = Client::get()->sortBy('nom');
         return view('clients', compact('clients'));
     }
 
@@ -21,8 +22,8 @@ class ClientController extends Controller
             'nom' => 'required',
             'prenom' => 'required',
             'email' => 'required',
-            'code_postal' => 'required',            
-            'ville' => 'required',   
+            'code_postal' => 'required',
+            'ville' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -38,7 +39,7 @@ class ClientController extends Controller
         $client->ville = strtoupper($request->ville);
         $client->save();
 
-        // $client->storeData($request->all());
+        $request->session()->flash('message', 'Le client a bien été ajouté');
         return redirect('/clients');
 
     }
@@ -47,6 +48,7 @@ class ClientController extends Controller
     {
         $client = Client::find($id);
         $client->delete();
+        Session::flash('message', 'Le client a bien été supprimé');
         return redirect('/clients');
     }
 

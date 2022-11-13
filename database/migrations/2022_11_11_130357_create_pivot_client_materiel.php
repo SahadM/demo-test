@@ -14,6 +14,8 @@ class CreatePivotClientMateriel extends Migration
     public function up()
     {
         Schema::create('pivot_client_materiel', function (Blueprint $table) {
+            // A customer can have the same device
+            $table->increments('lien_id');
 
             // Indexes for the foreign keys
             $table->unsignedInteger('client_id')->index();
@@ -22,7 +24,6 @@ class CreatePivotClientMateriel extends Migration
             // Constraints foreign keys
             $table->foreign('client_id')->references('id')->on('client')->onDelete('cascade');
             $table->foreign('materiel_id')->references('id')->on('materiel')->onDelete('cascade');
-            $table->timestamps();
 
         });
     }

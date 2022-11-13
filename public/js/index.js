@@ -1,25 +1,27 @@
 $('#formMaterielClient').on('submit', (e) => {
     let form = $(e.target);
     let selected_fields = form.serializeArray();
-
+    let notification_field = $('#notification');
     const fields = selected_fields.filter(item => item.value === '');
 
-    let notification_field = $('#notification');
-    if (fields.length) {       
+    if (fields.length) {
         notification_field
             .removeClass('alert-info')
             .addClass('alert-danger')
             .html("Veuillez sélectionner obligatoirement les deux champs !");
 
         return false;
-    } 
-    else {
-        notification_field
-            .removeClass('alert-danger')
-            .addClass('alert-success')
-            .html("Assignation effectué");
-
-        return false;
     }
+
+});
+
+$('button[data-toggle^="collapsing"]').on('click', (evt) => {  
+    let currentElement = $( evt.currentTarget);
+    let name_collapse = currentElement.attr("data-toggle");
+
+    currentElement
+        .closest('tr')
+        .nextAll(`tr.${name_collapse}.sub-row.collapse.out.hidden`)
+        .slideToggle();
 
 });

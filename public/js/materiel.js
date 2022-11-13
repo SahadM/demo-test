@@ -4,13 +4,13 @@ $('#formMateriel').on('submit', (e) => {
     let error_message = '';
     selected_fields.forEach((element) => {
         switch(element.name) {
-            case 'nom':             
+            case 'nom':
                 if (element.value === '' || /[A-Za-z]+/.test(element.value) === false) 
                     error_message += `Le champ ${element.name} est vide ou le format n'est pas valide !<br>`;
                 break;
             case 'prix':
                 let prix_field = parseInt(element.value);
-                if (prix_field < 0 || isNaN(prix_field)) 
+                if (prix_field < 0 || isNaN(prix_field))
                     error_message += `Le champ ${element.name} est vide ou la valeur est inferieur à 0 !<br>`;
                 break;
         }
@@ -25,14 +25,6 @@ $('#formMateriel').on('submit', (e) => {
 
         return false;
     }
-    else {
-        notification_field
-            .removeClass('alert-danger')
-            .addClass('alert-success')
-            .html("Ajout effectué");
-
-        return false;
-    }
-
 
 });
+

@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Materiel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class MaterielController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $materiels = Materiel::get()->sortBy('nom');      
+        $materiels = Materiel::get()->sortBy('nom');
         return view('materiels', compact('materiels'));
     }
 
@@ -17,7 +18,7 @@ class MaterielController extends Controller
     {
         $validator = \Validator::make($request->all(), [
             'nom' => 'required',
-            'prix' => 'required', 
+            'prix' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -29,6 +30,7 @@ class MaterielController extends Controller
         $materiel->prix = $request->prix;
         $materiel->save();
 
+        $request->session()->flash('message', 'Materiel a bien été ajouté');
         return redirect('/materiels');
 
     }
@@ -37,7 +39,7 @@ class MaterielController extends Controller
     {
         $materiel = Materiel::find($id);
         $materiel->delete();
-
+        Session::flash('message', 'Materiel a bien été supprimé'); 
         return redirect('/materiels');
     }
 

@@ -21,7 +21,8 @@ class Client extends Model
 
     public function materiels()
     {
-        return $this->belongsToMany(Materiel::class, 'pivot_client_materiel')->withPivot('client_id', 'materiel_id');
+        return $this->belongsToMany(Materiel::class, 'pivot_client_materiel')
+                    ->withPivot('lien_id', 'client_id', 'materiel_id');
     }
 
 }

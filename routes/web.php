@@ -27,5 +27,5 @@ Route::get('/stats', [StatsController::class, 'index']);
 Route::post('add_materiel_client', [IndexController::class, 'store'])->name('add_materiel_client');
 Route::post('add_client', [ClientController::class, 'store'])->name('add_client');
 Route::post('add_materiel', [MaterielController::class, 'store'])->name('add_materiel');
-
+Route::get('delete_client_materiel/{id}', [IndexController::class, 'destroy'])->name('delete_client_materiel');
 

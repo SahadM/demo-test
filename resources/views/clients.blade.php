@@ -8,10 +8,13 @@
     </div>
 
     <div id="notification" class="alert alert-info mt-5" role="alert">
-        Saisissez un client ci-dessous
+        Saisissez un client ci-dessous<br>
+        @if($message = Session::get('message'))
+            {{$message}}
+        @endif
     </div>
 
-    
+
     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
         <li class="nav-item" role="presentation">
             <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
@@ -52,7 +55,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Ajouter un client</button>
             </form>
-        
+
         </div>
 
         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
@@ -88,7 +91,7 @@
                 @endforeach
                 </tbody>
             </table>
-    
+
             @else
                 <div class="alert alert-info mt-5" role="alert">
                     Aucun client de saisi pour le moment !
@@ -97,7 +100,7 @@
         </div>
 
     </div>
- 
+
 </main>
 <script type="text/javascript" src="{{ URL::asset('js/client.js') }}"></script>
 
