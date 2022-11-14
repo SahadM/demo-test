@@ -12,24 +12,24 @@
   # Utilisation sans Docker:
     Avec la stack décrite ci-dessus, executer les commandes suivantes:
     
-    ```bash
+   
      composer install
      
      php artisan migrate
      php artisan db:seed --class=DataTestTableSeeder
      php artisan serve
-    ```
+    
     
   # Utilisation avec Docker :
   
     chargement de l'image Docker
     
-    ```bash
+    
     docker build . -t demo-test
-    ```
+   
     
     lancement
     
-    ```bash
+   
     docker-compose up -d
-    ```
+   
