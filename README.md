@@ -11,6 +11,7 @@
    
   # Utilisation sans Docker:
     Avec la stack décrite ci-dessus, executer les commandes suivantes:
+    
     ```
      composer install
      
@@ -21,12 +22,12 @@
     
   # Utilisation avec Docker :
   
-    - chargement de l'image Docker
+    chargement de l'image Docker
     ```
     docker build . -t demo-test
     ```
     
-    - lancement
+    lancement
     ```
     docker-compose up -d
     ```
