@@ -1,6 +1,6 @@
-* Test projet vente client materiel
+## Test projet vente client materiel
 
-  Stack:
+  # Stack:
     - Laravel 8
     - MySQL 8
     - Docker
@@ -9,20 +9,24 @@
     - ES6 Javascript
     
    
-  Utilisation sans Docker:
+  # Utilisation sans Docker:
     Avec la stack décrite ci-dessus, executer les commandes suivantes:
+    ```
      composer install
      
      php artisan migrate
      php artisan db:seed --class=DataTestTableSeeder
      php artisan serve
+    ```
     
-    
-  Utilisation avec Docker :
+  # Utilisation avec Docker :
   
     - chargement de l'image Docker
+    ```
     docker build . -t demo-test
+    ```
     
     - lancement
+    ```
     docker-compose up -d
-    
+    ```
