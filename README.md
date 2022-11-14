@@ -6,18 +6,17 @@
     - Docker
     - PHP 7.4
     - Apache
-    - ES6 Javascript
-    
+    - ES6 Javascript    
    
   # Utilisation sans Docker:
     Avec la stack décrite ci-dessus, executer les commandes suivantes:
     
    
-     composer install
+     > composer install
      
-     php artisan migrate
-     php artisan db:seed --class=DataTestTableSeeder
-     php artisan serve
+     > php artisan migrate
+     > php artisan db:seed --class=DataTestTableSeeder
+     > php artisan serve
     
     
   # Utilisation avec Docker :
@@ -25,11 +24,11 @@
     chargement de l'image Docker
     
     
-    docker build . -t demo-test
+    > docker build . -t demo-test
    
     
     lancement
     
    
-    docker-compose up -d
+    > docker-compose up -d
    
