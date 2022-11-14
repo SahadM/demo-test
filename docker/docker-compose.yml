@@ -1,0 +1,37 @@
+version: '3.3'
+
+services:
+  database:
+    image: mysql:8.0-oracle
+    # image: mysql:5
+    # restart: 'no'
+    # restart: on-failure:5 
+    # container_name: mysql_container
+    # hostname: mysql_container
+    environment: 
+      # MYSQL_ROOT_PASSWORD: MYSQL_ALLOW_EMPTY_PASSWORD=1
+      # MYSQL_RANDOM_ROOT_PASSWORD: 'no'
+      MYSQL_DATABASE: "test"
+      MYSQL_USER: "root"
+      MYSQL_PASSWORD: "password"
+    volumes:
+      - dbdata:/var/lib/mysql/
+    # ports:
+      # - "8889:3306"
+      # - "3306:3306"
+
+  app:
+    image: demo-test:latest
+    # restart: always
+    ports:
+      - "8888:80"
+    environment:
+      # DATABASE_URL: mysql://${DB_USERNAME:-root}:${DB_PASSWORD:-password}@${DB_HOST:-mysql_container}:3306/${DB_DATABASE:-test}
+      DATABASE_URL: "mysql://root:password@mysql_container:33060/test?serverVersion=8.0" 
+      # DATABASE_URL: "mysql://root:password@database:3306/test?serverVersion=5"  # 172.23.0.2
+    links:
+      # - database:mysql_container
+      - database
+      
+volumes:
+  dbdata:
